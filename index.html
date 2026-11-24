@@ -261,13 +261,18 @@
 
                 <!-- Card Tùy chỉnh giao diện -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6">
-                    <div class="flex items-center justify-between mb-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
                         <h2 class="text-base font-semibold text-slate-900">
                             2. Tùy chỉnh thiết kế & Kỹ thuật
                         </h2>
-                        <button type="button" id="btn-reset-style" class="text-xs font-medium text-brand-600 hover:text-brand-700 px-2.5 py-1 rounded-lg hover:bg-brand-50 transition">
-                            Mặc định
-                        </button>
+                        <div class="flex items-center gap-2">
+                            <button type="button" id="btn-outdoor-preset" class="text-xs font-semibold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-2.5 py-1 rounded-lg transition" title="Áp dụng màu Đen tuyền trên nền Trắng tinh + mức sửa lỗi cao để dễ quét ngoài trời nắng">
+                                ☀️ Chuẩn ngoài trời nắng
+                            </button>
+                            <button type="button" id="btn-reset-style" class="text-xs font-medium text-brand-600 hover:text-brand-700 px-2.5 py-1 rounded-lg hover:bg-brand-50 transition">
+                                Mặc định
+                            </button>
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -282,11 +287,11 @@
                             </div>
                             <!-- Gợi ý màu nhanh -->
                             <div class="flex items-center gap-2 pt-1">
+                                <button type="button" data-fg="#000000" class="preset-fg w-6 h-6 rounded-full bg-[#000000] ring-2 ring-offset-1 ring-transparent hover:scale-110 transition" title="Đen tuyền (Tốt nhất ngoài trời)"></button>
                                 <button type="button" data-fg="#0f172a" class="preset-fg w-6 h-6 rounded-full bg-[#0f172a] ring-2 ring-offset-1 ring-transparent hover:scale-110 transition" title="Đen Slate"></button>
                                 <button type="button" data-fg="#4f46e5" class="preset-fg w-6 h-6 rounded-full bg-[#4f46e5] ring-2 ring-offset-1 ring-transparent hover:scale-110 transition" title="Xanh Indigo"></button>
                                 <button type="button" data-fg="#059669" class="preset-fg w-6 h-6 rounded-full bg-[#059669] ring-2 ring-offset-1 ring-transparent hover:scale-110 transition" title="Xanh Ngọc"></button>
                                 <button type="button" data-fg="#e11d48" class="preset-fg w-6 h-6 rounded-full bg-[#e11d48] ring-2 ring-offset-1 ring-transparent hover:scale-110 transition" title="Đỏ Rose"></button>
-                                <button type="button" data-fg="#d97706" class="preset-fg w-6 h-6 rounded-full bg-[#d97706] ring-2 ring-offset-1 ring-transparent hover:scale-110 transition" title="Cam Hổ Phách"></button>
                             </div>
                         </div>
 
@@ -301,7 +306,7 @@
                             </div>
                             <!-- Gợi ý màu nền nhanh -->
                             <div class="flex items-center gap-2 pt-1">
-                                <button type="button" data-bg="#ffffff" class="preset-bg w-6 h-6 rounded-full bg-white border border-slate-300 hover:scale-110 transition" title="Trắng tinh"></button>
+                                <button type="button" data-bg="#ffffff" class="preset-bg w-6 h-6 rounded-full bg-white border border-slate-300 hover:scale-110 transition" title="Trắng tinh (Tốt nhất ngoài trời)"></button>
                                 <button type="button" data-bg="#f8fafc" class="preset-bg w-6 h-6 rounded-full bg-[#f8fafc] border border-slate-300 hover:scale-110 transition" title="Xám nhạt"></button>
                                 <button type="button" data-bg="#eef2ff" class="preset-bg w-6 h-6 rounded-full bg-[#eef2ff] border border-indigo-200 hover:scale-110 transition" title="Xanh nhạt"></button>
                                 <button type="button" data-bg="#fef3c7" class="preset-bg w-6 h-6 rounded-full bg-[#fef3c7] border border-amber-200 hover:scale-110 transition" title="Kem ấm"></button>
@@ -344,6 +349,11 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                         </svg>
                         <span>Độ tương phản giữa màu mã QR và màu nền khá thấp. Camera điện thoại có thể khó quét mã này!</span>
+                    </div>
+
+                    <!-- Mẹo quét ngoài trời nắng -->
+                    <div class="mt-4 p-3 rounded-xl bg-sky-50/80 border border-sky-200/80 text-sky-900 text-xs leading-relaxed">
+                        <strong class="font-semibold">Mẹo ngoài trời nắng:</strong> Dùng màu <span class="font-mono font-semibold">Đen (#000000)</span> trên nền <span class="font-mono font-semibold">Trắng (#FFFFFF)</span>, chọn mức sửa lỗi <span class="font-semibold">Q hoặc H</span>, và in trên chất liệu <span class="font-semibold">mờ (nhám / cán màng mờ)</span> thay vì bóng để tránh nắng phản chiếu gây lóa camera.
                     </div>
                 </div>
             </div>
@@ -562,6 +572,7 @@
             const sizeEl = document.getElementById('qr-size');
             const levelEl = document.getElementById('qr-level');
             const contrastWarningEl = document.getElementById('contrast-warning');
+            const btnOutdoorPreset = document.getElementById('btn-outdoor-preset');
             const btnResetStyle = document.getElementById('btn-reset-style');
 
             // DOM Xem trước & Khung thẻ VietQR
@@ -613,9 +624,6 @@
             // THUẬT TOÁN CHUẨN VIETQR (EMVCO NAPAS 247 + CRC-16/CCITT-FALSE)
             // =========================================================================
 
-            /**
-             * Chuẩn hóa chuỗi tiếng Việt thành không dấu ASCII an toàn cho hệ thống ngân hàng
-             */
             function normalizeBankText(str) {
                 if (!str) return '';
                 return str
@@ -627,9 +635,6 @@
                     .trim();
             }
 
-            /**
-             * Đóng gói một trường dữ liệu theo chuẩn TLV (Tag - Length - Value)
-             */
             function formatTLV(tag, value) {
                 if (value === undefined || value === null || value === '') return '';
                 const strVal = String(value);
@@ -637,9 +642,6 @@
                 return `${tag}${len}${strVal}`;
             }
 
-            /**
-             * Tính toán mã kiểm tra CRC-16/CCITT-FALSE (4 ký tự HEX viết hoa) theo chuẩn EMVCo
-             */
             function calculateCRC16(payload) {
                 let crc = 0xFFFF;
                 const polynomial = 0x1021;
@@ -657,9 +659,6 @@
                 return crc.toString(16).toUpperCase().padStart(4, '0');
             }
 
-            /**
-             * Tạo chuỗi dữ liệu VietQR chuẩn NAPAS 247 từ thông tin chuyển khoản
-             */
             function buildVietQRPayload({ bin, accountNumber, amount, memo }) {
                 const cleanBin = String(bin || '').replace(/\D/g, '');
                 const cleanAccount = String(accountNumber || '').trim().replace(/\s+/g, '');
@@ -672,33 +671,25 @@
                 const hasAmount = cleanAmount !== '' && Number(cleanAmount) > 0;
                 const cleanMemo = normalizeBankText(memo).slice(0, 50);
 
-                // 00: Payload Format Indicator = "01"
                 const tag00 = formatTLV('00', '01');
-                // 01: Point of Initiation Method ("11" = QR Tĩnh, "12" = QR Động có số tiền cố định)
                 const tag01 = formatTLV('01', hasAmount ? '12' : '11');
 
-                // 38: Merchant Account Information (NAPAS 247)
-                const subTag00 = formatTLV('00', 'A000000727'); // AID của NAPAS
+                const subTag00 = formatTLV('00', 'A000000727');
                 const beneficiaryInfo = formatTLV('00', cleanBin) + formatTLV('01', cleanAccount);
                 const subTag01 = formatTLV('01', beneficiaryInfo);
-                const subTag02 = formatTLV('02', 'QRIBFTTA'); // Dịch vụ chuyển nhanh NAPAS247 tới Tài khoản
+                const subTag02 = formatTLV('02', 'QRIBFTTA');
                 const tag38 = formatTLV('38', subTag00 + subTag01 + subTag02);
 
-                // 53: Transaction Currency = "704" (VND)
                 const tag53 = formatTLV('53', '704');
-                // 54: Transaction Amount (nếu có)
                 const tag54 = hasAmount ? formatTLV('54', cleanAmount) : '';
-                // 58: Country Code = "VN"
                 const tag58 = formatTLV('58', 'VN');
 
-                // 62: Additional Data Field Template (08 = Purpose of Transaction / Nội dung CK)
                 let tag62 = '';
                 if (cleanMemo) {
                     const subTag08 = formatTLV('08', cleanMemo);
                     tag62 = formatTLV('62', subTag08);
                 }
 
-                // Ghép chuỗi và thêm tiêu đề CRC "6304" trước khi tính checksum
                 const payloadWithoutCRC = `${tag00}${tag01}${tag38}${tag53}${tag54}${tag58}${tag62}6304`;
                 const crc = calculateCRC16(payloadWithoutCRC);
 
@@ -709,9 +700,6 @@
             // CÁC HÀM TIỆN ÍCH CHUNG
             // =========================================================================
 
-            /**
-             * Chuyển đổi chuỗi UTF-8 thành byte sequence để QRious mã hóa chuẩn tiếng Việt có dấu
-             */
             function encodeUTF8ForQR(str) {
                 try {
                     return unescape(encodeURIComponent(str));
@@ -720,18 +708,12 @@
                 }
             }
 
-            /**
-             * Định dạng số tiền có dấu chấm phân cách hàng nghìn
-             */
             function formatCurrencyVND(numericString) {
                 const digits = String(numericString || '').replace(/\D/g, '');
                 if (!digits) return '';
                 return Number(digits).toLocaleString('vi-VN');
             }
 
-            /**
-             * Kiểm tra độ tương phản giữa 2 màu Hex
-             */
             function checkContrast(hex1, hex2) {
                 const getLuminance = (hex) => {
                     const rgb = parseInt(hex.slice(1), 16);
@@ -839,7 +821,6 @@
                 const size = parseInt(sizeEl.value, 10) || 300;
                 const level = levelEl.value || 'M';
 
-                // Kiểm tra độ tương phản
                 const ratio = checkContrast(fg, bg);
                 if (ratio < 2.5) {
                     contrastWarningEl.classList.remove('hidden');
@@ -861,7 +842,6 @@
                     qrDataString = trimmedText;
                     encodedValue = trimmedText ? encodeUTF8ForQR(trimmedText) : '';
                 } else {
-                    // Chế độ Chuyển khoản Ngân hàng (VietQR)
                     const activeBin = selectedBank.shortName === 'OTHER' ? bankCustomBinEl.value.trim() : selectedBank.bin;
                     const accountNum = bankAccountEl.value.trim();
                     const ownerName = bankOwnerEl.value.trim();
@@ -870,7 +850,6 @@
                     const rawMemo = bankMemoEl.value;
                     const normalizedMemo = normalizeBankText(rawMemo).slice(0, 50);
 
-                    // Cập nhật nhãn loại QR (Tĩnh vs Động)
                     if (numericAmount > 0) {
                         qrTypeBadge.textContent = 'QR Động (Cố định tiền)';
                         qrTypeBadge.className = 'text-[11px] font-medium px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200';
@@ -879,10 +858,8 @@
                         qrTypeBadge.className = 'text-[11px] font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-600';
                     }
 
-                    // Hiển thị xem trước nội dung không dấu
                     memoNormalizedPreview.textContent = normalizedMemo ? `Chuẩn CK: "${normalizedMemo}"` : '';
 
-                    // Tạo chuỗi payload VietQR
                     qrDataString = buildVietQRPayload({
                         bin: activeBin,
                         accountNumber: accountNum,
@@ -895,7 +872,6 @@
 
                     if (qrDataString) {
                         isBankReady = true;
-                        // Cập nhật thông tin lên Khung Thẻ Chuyển Khoản VietQR
                         cardBankShort.textContent = selectedBank.shortName === 'OTHER' ? `BIN ${activeBin}` : selectedBank.shortName;
                         cardBankName.textContent = selectedBank.shortName === 'OTHER' ? `Chuyển khoản nhanh NAPAS 247 (BIN ${activeBin})` : selectedBank.name;
                         cardAccountNumber.textContent = accountNum;
@@ -923,9 +899,7 @@
                     }
                 }
 
-                // Xử lý hiển thị khung Canvas
                 if (!qrDataString) {
-                    // Đưa canvas về khung mặc định nếu đang nằm trong thẻ VietQR
                     if (canvasEl.parentElement !== defaultCanvasFrame) {
                         defaultCanvasFrame.insertBefore(canvasEl, emptyStateEl);
                     }
@@ -946,7 +920,6 @@
                     return;
                 }
 
-                // Có dữ liệu hợp lệ -> Render QR
                 canvasEl.classList.remove('hidden');
                 emptyStateEl.classList.add('hidden');
                 emptyStateEl.classList.remove('flex');
@@ -957,14 +930,12 @@
                 btnSaveHistory.disabled = false;
 
                 if (currentMode === 'bank' && isBankReady) {
-                    // Di chuyển canvas vào khung thẻ VietQR chuyên nghiệp
                     if (canvasEl.parentElement !== vietqrCanvasSlot) {
                         vietqrCanvasSlot.appendChild(canvasEl);
                     }
                     defaultCanvasFrame.classList.add('hidden');
                     vietqrCardFrame.classList.remove('hidden');
                 } else {
-                    // Đưa canvas về khung mặc định
                     if (canvasEl.parentElement !== defaultCanvasFrame) {
                         defaultCanvasFrame.insertBefore(canvasEl, emptyStateEl);
                     }
@@ -993,7 +964,6 @@
                 exportCanvas.height = height;
                 const ctx = exportCanvas.getContext('2d');
 
-                // Hàm phụ trợ ngắt dòng văn bản tự động nếu tên ngân hàng hoặc nội dung dài
                 function wrapCanvasText(context, text, maxWidth) {
                     const words = String(text).split(' ');
                     const lines = [];
@@ -1011,7 +981,6 @@
                     return lines;
                 }
 
-                // 1. Nền Gradient xanh Indigo chuyên nghiệp
                 const grad = ctx.createLinearGradient(0, 0, 0, height);
                 grad.addColorStop(0, '#4f46e5');
                 grad.addColorStop(0.5, '#4338ca');
@@ -1019,7 +988,6 @@
                 ctx.fillStyle = grad;
                 ctx.fillRect(0, 0, width, height);
 
-                // 2. Header chữ VIETQR • NAPAS 247
                 ctx.fillStyle = '#ffffff';
                 ctx.font = 'bold 22px Inter, sans-serif';
                 ctx.textAlign = 'left';
@@ -1029,7 +997,6 @@
                 ctx.fillStyle = '#fde047';
                 ctx.fillText(cardBankShort.textContent, width - 48, 56);
 
-                // 3. Khung trắng bo góc chứa mã QR ở giữa
                 const boxSize = 450;
                 const boxX = (width - boxSize) / 2;
                 const boxY = 88;
@@ -1045,11 +1012,9 @@
                 ctx.closePath();
                 ctx.fill();
 
-                // Vẽ ảnh QR vào giữa khung trắng
                 const qrPad = 24;
                 ctx.drawImage(canvasEl, boxX + qrPad, boxY + qrPad, boxSize - qrPad * 2, boxSize - qrPad * 2);
 
-                // 4. Khung nền mờ bo góc chứa thông tin người nhận bên dưới
                 const infoBoxX = 48;
                 const infoBoxY = boxY + boxSize + 28;
                 const infoBoxW = width - 96;
@@ -1066,13 +1031,11 @@
                 ctx.closePath();
                 ctx.fill();
 
-                // Vẽ các dòng thông tin có nhãn rõ ràng
                 ctx.textAlign = 'left';
                 const textLeftX = infoBoxX + 24;
                 const maxLineWidth = infoBoxW - 48;
                 let currentY = infoBoxY + 42;
 
-                // Dòng 1: Ngân hàng: ...
                 ctx.fillStyle = '#e0e7ff';
                 ctx.font = '600 20px Inter, sans-serif';
                 const bankLines = wrapCanvasText(ctx, `Ngân hàng: ${cardBankName.textContent}`, maxLineWidth);
@@ -1082,7 +1045,6 @@
                 });
                 currentY += 10;
 
-                // Dòng 2: Tên tài khoản: ... (nếu có)
                 if (!cardOwnerRow.classList.contains('hidden') && cardOwnerName.textContent) {
                     ctx.fillStyle = '#ffffff';
                     ctx.font = 'bold 22px Inter, sans-serif';
@@ -1094,7 +1056,6 @@
                     currentY += 10;
                 }
 
-                // Dòng 3: Số tài khoản: ...
                 ctx.fillStyle = '#e0e7ff';
                 ctx.font = '500 20px Inter, sans-serif';
                 const accLabel = 'Số tài khoản: ';
@@ -1106,7 +1067,6 @@
                 ctx.fillText(cardAccountNumber.textContent, textLeftX + accLabelWidth, currentY);
                 currentY += 40;
 
-                // Dòng 4: Số tiền: ... (nếu có)
                 if (!cardAmountWrap.classList.contains('hidden') && cardAmountText.textContent) {
                     ctx.fillStyle = '#6ee7b7';
                     ctx.font = 'bold 21px Inter, sans-serif';
@@ -1114,7 +1074,6 @@
                     currentY += 34;
                 }
 
-                // Dòng 5: Nội dung: ... (nếu có)
                 if (!cardMemoWrap.classList.contains('hidden') && cardMemoText.textContent) {
                     ctx.fillStyle = '#f8fafc';
                     ctx.font = '500 19px Inter, sans-serif';
@@ -1128,9 +1087,6 @@
                 return exportCanvas;
             }
 
-            /**
-             * Hiển thị thông báo Toast
-             */
             function showToast(message, type = 'success') {
                 const container = document.getElementById('toast-container');
                 const toast = document.createElement('div');
@@ -1157,9 +1113,6 @@
                 }, 3000);
             }
 
-            /**
-             * Tải xuống mã QR (hoặc Thẻ VietQR)
-             */
             function downloadQRCode(includeBankCard = false) {
                 try {
                     const targetCanvas = includeBankCard ? generateVietQRCardCanvas() : canvasEl;
@@ -1188,9 +1141,6 @@
                 }
             }
 
-            /**
-             * Sao chép hình ảnh mã QR vào Clipboard
-             */
             async function copyQRImageToClipboard() {
                 try {
                     const targetCanvas = currentMode === 'bank' ? generateVietQRCardCanvas() : canvasEl;
@@ -1227,9 +1177,6 @@
                 }
             }
 
-            /**
-             * Quản lý Lịch sử (Hỗ trợ cả mã QR thường và mã VietQR Ngân hàng)
-             */
             function getHistory() {
                 try {
                     const data = localStorage.getItem(STORAGE_KEY);
@@ -1283,7 +1230,6 @@
                             createdAt: new Date().toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' })
                         };
                     } else {
-                        // Lưu lịch sử VietQR Ngân hàng
                         const activeBin = selectedBank.shortName === 'OTHER' ? bankCustomBinEl.value.trim() : selectedBank.bin;
                         const accountNum = bankAccountEl.value.trim();
                         const ownerName = bankOwnerEl.value.trim();
@@ -1465,11 +1411,9 @@
             // GẮN CÁC SỰ KIỆN TƯƠNG TÁC (EVENT LISTENERS)
             // =========================================================================
 
-            // Chuyển đổi Tab
             tabTextBtn.addEventListener('click', () => switchTab('text'));
             tabBankBtn.addEventListener('click', () => switchTab('bank'));
 
-            // Sự kiện Chế độ Văn bản
             qrTextEl.addEventListener('input', updateQRCode);
             btnClearText.addEventListener('click', () => {
                 qrTextEl.value = '';
@@ -1483,7 +1427,6 @@
                 });
             });
 
-            // Sự kiện Dropdown tìm kiếm Ngân hàng
             bankSearchEl.addEventListener('focus', () => {
                 bankSearchEl.select();
                 renderBankDropdown('');
@@ -1505,7 +1448,6 @@
                 }
             });
 
-            // Đóng dropdown khi click ra ngoài
             document.addEventListener('click', (e) => {
                 const wrapper = document.getElementById('bank-dropdown-wrapper');
                 if (wrapper && !wrapper.contains(e.target)) {
@@ -1513,7 +1455,6 @@
                 }
             });
 
-            // Sự kiện nhập liệu thông tin Ngân hàng
             bankCustomBinEl.addEventListener('input', (e) => {
                 e.target.value = e.target.value.replace(/\D/g, '').slice(0, 6);
                 updateQRCode();
@@ -1547,7 +1488,6 @@
                 updateQRCode();
             });
 
-            // Đồng bộ Color Picker & ô nhập mã Hex
             fgColorEl.addEventListener('input', (e) => {
                 fgHexEl.value = e.target.value.toUpperCase();
                 updateQRCode();
@@ -1595,6 +1535,16 @@
             sizeEl.addEventListener('change', updateQRCode);
             levelEl.addEventListener('change', updateQRCode);
 
+            btnOutdoorPreset.addEventListener('click', () => {
+                fgColorEl.value = '#000000';
+                fgHexEl.value = '#000000';
+                bgColorEl.value = '#ffffff';
+                bgHexEl.value = '#FFFFFF';
+                levelEl.value = 'Q';
+                updateQRCode();
+                showToast('Đã áp dụng cấu hình tối ưu cho ánh nắng ngoài trời (Đen/Trắng + Mức Q).', 'info');
+            });
+
             btnResetStyle.addEventListener('click', () => {
                 fgColorEl.value = '#0f172a';
                 fgHexEl.value = '#0F172A';
@@ -1606,7 +1556,6 @@
                 showToast('Đã đặt lại thiết kế mặc định.', 'info');
             });
 
-            // Các nút hành động chính
             btnDownload.addEventListener('click', () => downloadQRCode(false));
             btnDownloadCard.addEventListener('click', () => downloadQRCode(true));
             btnCopyImg.addEventListener('click', copyQRImageToClipboard);
@@ -1618,7 +1567,6 @@
                 showToast('Đã xóa toàn bộ lịch sử mã QR.', 'info');
             });
 
-            // Khởi chạy lần đầu
             renderBankDropdown('');
             updateQRCode();
             renderHistory();
